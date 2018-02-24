@@ -1,6 +1,7 @@
 const { FuseBox } = require('fuse-box')
 
 const fuse = FuseBox.init({
+    tsConfig: './tsconfig.json',
     homeDir: 'src',
     output: 'build/$name.js',
     target: 'server@es7',
