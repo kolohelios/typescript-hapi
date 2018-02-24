@@ -1,18 +1,3 @@
-import * as Hapi from 'hapi'
+import Server from './lib/server'
 
-const port = process.env.PORT || 3000
-
-const server = new Hapi.Server({
-    port,
-})
-
-async function startServer() {
-    try {
-        await server.start()
-            console.log(`Server is running at ${server.info.uri}`)
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-startServer()
+Server()

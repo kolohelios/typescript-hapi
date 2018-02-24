@@ -4,6 +4,7 @@ To further explore TypeScript, and check in on Hapi's current state, I'm going t
 
 * run `npm i`
 * run `npm run dev` (no need for nodemon or other watchers; FuseBox takes care of this for us)
+The server will start on port 8000; edit and away and see your changes reflected.
 
 ## Hapi
 
