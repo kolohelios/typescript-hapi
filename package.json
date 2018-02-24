@@ -2,10 +2,27 @@
   "name": "typescript-hapi",
   "version": "0.0.1",
   "description": "",
+  "engines": {
+    "node": ">=8.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kolohelios/typescript-hapi"
+  },
   "main": "index.js",
   "scripts": {
+    "dev": "node fuse.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "kolohelios",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/hapi": "^17.0.1",
+    "@types/node": "^9.4.6",
+    "fuse-box": "^3.1.3",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "hapi": "^17.2.0"
+  }
 }
