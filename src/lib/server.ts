@@ -1,14 +1,17 @@
 import * as Hapi from 'hapi'
 import Config from './config'
 
-const config = Config();
-const isDevelopment = config.NODE_ENV === 'development'
+const config = Config()
 
-const server = new Hapi.Server({
+// TODO deal with typings issue with Hapi.Server no longer being a constructor
+const server = Hapi.Server({
     port: config.PORT,
     debug: {
-        request: isDevelopment ? [ 'received' ] : []
+        request: [ 'received' ]
     },
+    app: {
+        environment: config.NODE_ENV
+    }
 })
 
 server.route({
@@ -21,12 +24,12 @@ server.route({
     }
 })
 
-async function startServer() {
+const init = async (callback) => {
     try {
         await server.start()
-            console.log(`Server is running with environment ${config.NODE_ENV} at ${server.info.uri}`)
+        return callback(null, server)
     } catch (err) {
-        console.log(err)
+        return callback(err)
     }
 }
 
@@ -36,4 +39,4 @@ server.events.on('log', (event, tags) => {
     console.log(`${new Date().toISOString()} | ${tagsJoined} | ${msg}`)
 })
 
-export default startServer
+export { init, server }
