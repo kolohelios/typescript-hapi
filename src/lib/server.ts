@@ -24,12 +24,15 @@ server.route({
     }
 })
 
-const init = async (callback) => {
+const init = async () => {
     try {
         await server.start()
-        return callback(null, server)
+        console.log('--------------------------------------------------------------------------------');
+        console.log('Hapi:\n', server.info.uri);
+        console.log('Environment:\n', server.settings.app.environment);
+        console.log('--------------------------------------------------------------------------------');
     } catch (err) {
-        return callback(err)
+        throw new Error(err)
     }
 }
 

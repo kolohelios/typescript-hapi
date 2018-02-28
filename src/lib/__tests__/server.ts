@@ -1,15 +1,9 @@
 import * as Server from '../server'
 
+jest.unmock('hapi')
+
 describe('test server', () => {
-    afterAll(async (done) => {
-        Server.server.events.on('stop', () => {
-            done()
-        })
-
-        Server.server.stop()
-    })
-
-    test('test endpoint', async () => {
+    test('test endpoint /{*name}', async () => {
         const options = {
             method: 'GET',
             url: '/Jon',
@@ -20,21 +14,19 @@ describe('test server', () => {
 
         expect(response.statusCode).toBe(200)
         expect(payload).toBe('Hello, Jon')
-
-        await Server.server.stop()
     })
 
-    test('start and stop server', async () => {
-        await Server.init(() => {})
-        await Server.server.stop()
-    })
+    test('start and stop server using our init method', async () => {
+        try {
+            await Server.init()
+        } catch(error) {
+            expect(error).toBeNull()
+        }
 
-    test('error in start up', async () => {
-        Server.server.start()
-
-        await Server.init(async (err, server) => {
-            expect(err.message).toBe('Cannot start server while it is in initializing phase')
-            Server.server.stop()
-        })
+        try {
+            await Server.server.stop()
+        } catch(error) {
+            expect(error).toBeNull()
+        }
     })
 })
