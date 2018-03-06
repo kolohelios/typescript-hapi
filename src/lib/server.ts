@@ -1,7 +1,38 @@
 import * as Hapi from 'hapi'
 import Config from './config'
+import "reflect-metadata"
+import { createConnection } from 'typeorm'
+import { User } from './models/user'
 
 const config = Config()
+
+createConnection({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: 'mypass',
+    database: 'typescript-hapi',
+    entities: [
+        User,
+    ],
+    synchronize: true,
+    logging: false,
+})
+    .then(async connection => {
+        let user = new User()
+        user.id = 'jedwards'
+        user.cookie = 'some string'
+
+        await connection.manager
+            .save(user)
+            .then(user => {
+                // console.log('User has been saved.')
+                console.log(user)
+            })
+        connection.close()
+    })
+    .catch(console.error)
 
 // TODO deal with typings issue with Hapi.Server no longer being a constructor
 const server = Hapi.Server({

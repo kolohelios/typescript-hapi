@@ -3,6 +3,14 @@ import * as Server from '../server'
 jest.unmock('hapi')
 
 describe('test server', () => {
+    afterAll(async () => {
+        try {
+            await Server.server.stop()
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
     test('test endpoint /{*name}', async () => {
         const options = {
             method: 'GET',

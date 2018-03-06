@@ -10,6 +10,8 @@ describe('test config', () => {
 
         expect(config.NODE_ENV).toBe('development')
         expect(config.PORT).toBe(8000)
+        expect(config.DB_HOST).toBe('localhost')
+        expect(config.DB_NAME).toBe('typescript-hapi')
     })
 
     test('test environment', () => {
@@ -17,6 +19,8 @@ describe('test config', () => {
 
         expect(config.NODE_ENV).toBe('test')
         expect(config.PORT).toBe(0)
+        expect(config.DB_HOST).toBe('localhost')
+        expect(config.DB_NAME).toBe('typescript-hapi')
     })
 
 
@@ -27,5 +31,7 @@ describe('test config', () => {
 
         expect(config.NODE_ENV).toBe('production')
         expect(config.PORT).toBe(0)
+        expect(config.DB_HOST).toBe('')
+        expect(config.DB_NAME).toBe('typescript-hapi')
     })
 })
