@@ -21,3 +21,15 @@ TypeScript isn't just for Angular anymore. React, Vue.JS, and Aurelia developers
 ### Why Fuse-Box instead of Gulp or Grunt?
 
 Fuse-Box is "TypeScript-first", if I may call it that. Gulp and Grunt are not.
+
+### mariadb
+
+#### Docker command
+
+(and use a password a more complicated password than following)
+`docker run -p 3306:3306 --name mariadbtest -e MYSQL_ROOT_PASSWORD=mypass -d mariadb`
+
+#### schema creation:
+```
+CREATE SCHEMA `typescript-hapi` DEFAULT CHARACTER SET latin1;
+```
